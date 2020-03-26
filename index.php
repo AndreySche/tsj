@@ -13,4 +13,6 @@ echo $menu;
 include "include/pages/$page.php";
 include "inc/footer.php";
 
+Debug( $page );
+
 ?>
