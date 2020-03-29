@@ -6,18 +6,22 @@ class Menu{
 		$this->tabs = $tabs;
 	}
 
-	function Show(){
-		$echo = '<nav class="navigation"><ul class="navigation__list">';
-		foreach( $this->ar as $key=>$val ){
-			$echo .= '<li class="navigation__item">';
-			$echo .= '<a href="'.$val['link'].'" class="navigation__link">'.$val['title'].'</a>';
-			$echo .= $this->SubMenu( $val );
-			$echo .= '</li>';
-		}
-		$title = $this->SetTitle();
-		$echo .= "</ul></nav>";
+	function ShowHead(){
 
-		return [ "menu" => $echo, "title" => $title ];
+		$params["{menu}"] = '';
+		foreach( $this->ar as $key=>$val ){
+			$_link = isset($val['link']) ? $val['link'] : $key ;
+			$params["{menu}"] .= '<li>';
+			$params["{menu}"] .= '<a href="'.$_link.'">'.$val['title'].'</a>';
+			$params["{menu}"] .= $this->SubMenu( $val );
+			$params["{menu}"] .= "</li>\n";
+		}
+		$params["{title}"] = $this->SetTitle();
+
+		$file = file_get_contents( "include/page/html/header.html" );
+		$htmlPage = ReplaceFile( $file, $params );
+
+		return $htmlPage;
 	}
 
 	private function SubMenu( $row ){
@@ -32,6 +36,24 @@ class Menu{
 		}
 		$echo .= '</ul>';
 		return $echo;
+	}
+
+	function PageInclude(){
+		$page = $this->GetPage();
+
+//		$path = "include/page/$page/$tab.php";
+		$path = "include/page/$page.php";
+		if( !file_exists($path) )	$path = "include/page/404.php";
+		return $path;
+	}
+
+	private function GetPage(){
+		$page = 'main';
+		if( !isset($_GET['page']) )	return $page;
+		if( empty($_GET['page']) )	return $page;
+
+		$page = $_GET['page'];
+		return $page;
 	}
 
 	function GetTabs( $page ){
@@ -57,9 +79,9 @@ class Menu{
 				and $title != $this->tabs[$page][$tab] ){
 			$title = $this->tabs[$page][$tab] . " $_symbol $title";
 		}
-		else {
+/*		else {
 			$title = " $_symbol $title";
-		}
+		}*/
 
 		return $title;
 	}

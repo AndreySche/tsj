@@ -2,21 +2,39 @@
 <!DOCTYPE html>
 <html><head>
 	<title>{title}</title>
-
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700" rel="stylesheet" type="text/css">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="css/main.css">
-
-	<script type="text/javascript" src="java/jquery.3.3.1.min.js"></script>
-	<script type="text/javascript" src="java/func.js"></script>
+	<link rel="stylesheet" href="main.css" type="text/css" media="screen" />
 </head>
 
 <body>
+
+
+
 <div class="wrapper">
-	<div class="flex-padding">
+	<div class="flex-row">
 
 
-		<div class="flex-center">{menu}</div>
 
-		<div class="flex-row">
+		<div class="flex-logo bg-green">
+			<div class="border"><img src="config/img/logo.png" style="width: 250px;"></div>
+		</div>
+
+
+
+		<div class="flex-center bg-yellow">
+			<div class="border right">
+				<div class="navigation">
+					<ul>
+{menu}
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+</div>

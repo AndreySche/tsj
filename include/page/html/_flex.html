@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html><head>
+	<title>-= flex =-</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head><body>
+
+
+
+
+<div class="wrapper">
+
+	<div class="flex-row">
+
+		<div class="flex-logo bg-green">
+			<div class="border">logo</div>
+		</div>
+
+		<div class="flex-center bg-yellow ">
+			<div class="border right">menu | menu | menu | menu</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+
+<div class="wrapper">
+
+	<div class="flex-row">
+
+		<div class="flex-sidebar bg-green">
+			<div class="border">sidebar</div>
+		</div>
+
+		<div class="flex-center bg-yellow">
+			<div class="border">center</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+<div class="wrapper">
+
+	<div class="flex-row">
+
+
+		<div class="flex-center bg-yellow">
+			<div class="border">center left</div>
+		</div>
+
+		<div class="flex-center bg-yellow">
+			<div class="border">center right</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+</body></html>
+
+<style>
+.wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.flex-row {
+	display: flex;
+	width: 100%;
+	max-width: 1100px;
+}
+.flex-sidebar {		min-width: 300px;	}
+.flex-logo {		min-width: 100px;	}
+.flex-center{		width: 100%;		}
+
+@media (max-width: 820px) {
+	.flex-sidebar, .flex-center {		width: 100%;	}
+	.flex-row {		display: inline;	}
+}
+
+
+
+
+
+
+
+
+.border {
+	border: 1px solid grey;
+	padding: 5px 0;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px ;
+	color: #4f4f4f;
+	margin: 0 10px;
+	padding: 0;
+}
+
+.bg-green {		background-color: #CEFD7D;	}
+.bg-yellow {	background-color: #ffc764;	}
+.bg-blue {		background-color: #BDE5FF;	}
+.bg-viol {		background-color: #ECD9FF;	}
+.bg-pink {		background-color: #FFA1A1;	}
+.right{			float: right;				}
+
+</style>

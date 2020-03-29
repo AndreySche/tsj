@@ -89,14 +89,6 @@ function DropWrong( $txt, $no_html=true ){
 }
 
 // --------------------
-function GETnoEmpty( $var ){
-	if( !isset($_GET[$var]) )	return null;
-	if( empty($_GET[$var]) )	return null;
-	return DropWrong( $_GET[$var] );
-}
-
-
-// --------------------
 function txtBR( $text ){
 	$text = str_replace( "\r\n", "<br>", $text);
 	$text = str_replace( "\n\r", "<br>", $text);

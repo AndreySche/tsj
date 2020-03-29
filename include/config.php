@@ -1,13 +1,15 @@
 <?php
 
 $menuSql = [
-	'main' 		=> [	'title'=>'Главная', 			'link'=>"/"	],
-	'inctuct' 	=> [	'title'=>'Инструкции'						],
-	'report' 	=> [	'title'=>'Отчеты'							],
-	'life' 		=> [	'title'=>'ТСЖ <b class="green">Life</b>'	]
+	'main' 		=> [	'title'=>'Главная', 	'link'=>"/.betta/.tsj/"	],
+	'manager' 	=> [	'title'=>'Сотрудники'		],
+	'inctuct' 	=> [	'title'=>'Инструкции'		],
+	'addr' 		=> [	'title'=>'Адрес'			],
+	'docs' 		=> [	'title'=>'Документация'		]
 ];
 
 $tabsSql = [
+
 	'inctuct' => [ 
 		'index'		=> 'Правила', 
 		'nas' 		=> 'Оплата' 
