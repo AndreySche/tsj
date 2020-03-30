@@ -1,0 +1,69 @@
+<?php
+trait Sql
+{
+
+	protected function Connect( $sql ){
+		if ( isset( $this->db ) ){
+			Debug( "sql_connect already" );
+			return;
+		}
+
+		$host = $sql['host'];
+		$user = $sql['user'];
+		$pass = $sql['pass'];
+		$base = $sql['base'];
+		$char = isset( $sql['char'] ) ? "charset=".$sql['char'] : "" ;
+
+		$dsn = "mysql:host=$host;dbname=$base;$char;";
+		$ar = [	PDO::ATTR_ERRMODE				=> PDO::ERRMODE_EXCEPTION,
+				PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC,
+				PDO::ATTR_EMULATE_PREPARES		=> false	];
+
+		try {			$this->db = new PDO( $dsn,$user,$pass,$ar );		return;		}
+		catch( PDOException $e ){		$msg = $e->getMessage();			}
+
+		$this->AddError( "Ошибка сервера: $msg" );		// выводится адрес сервера, выводить только для админа !!!
+//		echo 'Ошибка sql.';
+		exit;
+	}
+
+	private function SqlSetLimitPgntr(){
+		$rowOnePage = $GLOBALS['rowOnePage'];
+		$pageNow = $GLOBALS['pageNow'];
+		$limit = 'LIMIT '.(($pageNow-1)*$rowOnePage).', '.$rowOnePage;
+		return $limit;
+	}
+
+	private function SqlAddSearch( $input, $field ){
+		if( !isset($input) )	return;
+
+		$input = str_replace( ["_"], ["\_"], $input );
+		$where = ( strlen($input)>1 ) ? "$field LIKE '%$input%'" : "" ;
+		if( GETifRus( "login" ) )	$where = "$field LIKE '%$input%'";
+		return $where;
+	}
+
+	private function SqlGlueWhere( $ar ){
+		$where = "";
+		foreach( $ar as $val ){
+			if( !empty($val) ){
+				$where .= " $val AND";
+			}
+		}
+		if( empty($where) )	return;
+		$where = "WHERE".substr( $where, 0, -4 );
+		return $where;
+	}
+
+	private function CountRows( $from ){
+		$sql = "SELECT COUNT(*) as count $from";
+		$res = $this->db->query( $sql );
+		return $res->fetchColumn();
+	}
+
+	private function SqlSetOrder( $base, $order ){
+		$order = $order == null ? "_add" : $order ;
+		return "ORDER BY $base"."_del ASC, $base$order";
+	}
+}
+?>
