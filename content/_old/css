@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Oranienbaum';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oranienbaum'), local('Oranienbaum-Regular'), url(https://web.archive.org/web/20181224171356im_/https://fonts.gstatic.com/s/oranienbaum/v6/OZpHg_txtzZKMuXLIVrx-0zg5Eg.ttf) format('truetype');
+}
+
+/*
+     FILE ARCHIVED ON 17:13:56 Dec 24, 2018 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 14:28:11 Nov 11, 2019.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  CDXLines.iter: 23.746 (3)
+  exclusion.robots.policy: 0.176
+  captures_list: 149.031
+  PetaboxLoader3.datanode: 110.131 (4)
+  RedisCDXSource: 3.099
+  esindex: 0.014
+  exclusion.robots: 0.191
+  PetaboxLoader3.resolve: 237.694
+  load_resource: 317.841
+  LoadShardBlock: 41.485 (3)
+*/
