@@ -4,10 +4,8 @@ AddDefaultCharset UTF-8
 DirectoryIndex index.php
 
 RewriteEngine On
-RewriteRule ^([a-zA-Z?0-9\-]+)$ /.betta/.tsj/index.php?page=$1 [L,QSA]
+RewriteRule ^([a-zA-Z?0-9\-]+)$ /index.php?page=$1 [L,QSA]
 
-#RewriteRule cat/(.*)/(.*)/$ /script.php?$1=$2 
-
-ErrorDocument 404 /.betta/.tsj/error
-ErrorDocument 505 /.betta/.tsj/error
-ErrorDocument 301 /.betta/.tsj/error
+ErrorDocument 404 /error
+ErrorDocument 505 /error
+ErrorDocument 301 /error
