@@ -42,6 +42,20 @@ function ReplaceFile( $file, $params ){
 }
 
 // --------------------
+function ShowDateLong( $ti, $one=false, $week=false ){
+	if ( $ti < 1 )	return '-';
+//	$ar = array( 'вс.', 'пн.', 'вт.', 'ср.', 'чт.', 'пт.', 'сб.' );
+	$ar = array( 'воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота' );
+	$week = $week ? $ar[ date ( "w", $ti ) ].', ' : '' ;
+	$date = date ( "m", $ti );
+	$row_month = array('', 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря');
+	$row_month_2 = array('', 'январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь');
+	if ( $one ) 
+		return $week.$row_month_2[($date-0)].' '.date ( "Y", $ti );
+	return $week.date ( "d", $ti ).' '.$row_month[($date-0)].' '.date ( "Y", $ti );
+}
+
+// --------------------
 function ShowDate( $data, $short=false, $seconds=true ){
 	if ( $data < 1 )	return "-";
 	if( $short )	return date( "d-m-Y", $data );

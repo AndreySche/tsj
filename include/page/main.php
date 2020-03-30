@@ -1,5 +1,7 @@
 <?php
 
+include "include/page/mysql/news.php";
+
 $params['{left_content}'] = txtBR( 
 "<h1>Товарищество собственников жилья «Угрешская, 30»</h1>
 <b>Члены Правления ТСЖ «Угрешская, 30» на 2019 г.</b>
@@ -20,9 +22,13 @@ $params['{left_content}'] = txtBR(
 3. Ионова Ольга Владимировна
 " );
 
-$params['{right_content}'] = "
+
+$params['{right_content}'] = $content->ReadNews( $news );	// из файла /include/page/mysql/news.php	=> перенести в mysql
+
+$params['{right_content}'] =
+"
 <h1>Новости</h1>
-";
+".$params['{right_content}'];
 
 $file = file_get_contents( "include/page/html/template_1.html" );
 

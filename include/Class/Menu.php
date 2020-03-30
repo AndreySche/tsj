@@ -4,6 +4,7 @@ class Menu{
 	function __construct( $menu, $tabs ){
 		$this->ar = $menu;
 		$this->tabs = $tabs;
+		$this->page = null;
 	}
 
 	function ShowHead(){
@@ -22,6 +23,23 @@ class Menu{
 		$htmlPage = ReplaceFile( $file, $params );
 
 		return $htmlPage;
+	}
+
+	function TabsMenu(){
+		$page = $this->GetPage();
+		if( !isset($this->tabs[$page]) )	return null;
+
+		$res = '<div class="tabsMenu">'."\n";
+		$count = count($this->tabs[$page]);
+		$i = 0;
+		foreach( $this->tabs[$page] as $key=>$val ){
+			$class = $count > ++$i ? '' : ' class="last"';
+			$res .= "<div$class>"."\n";
+			$res .= '<a href="'.$page.'?tab='.$key.'">'.$val.'</a>'."\n";
+			$res .= '</div>'."\n";
+		}
+		$res .= '</div>'."\n";
+		return $res;
 	}
 
 	private function SubMenu( $row ){
@@ -47,19 +65,40 @@ class Menu{
 		return $path;
 	}
 
+	function MultInclude(){
+		$page = $this->GetPage();
+		$tabs = $this->GetTabs( $page );
+
+		$params['{left_content}'] = $this->TabsMenu();
+
+		$path = "include/page/$page/$tabs.php";
+		if( !file_exists($path) )	$path = "include/page/html/404.html";
+		$params['{right_content}'] = file_get_contents( $path );
+
+		return $params;
+	}
+
 	private function GetPage(){
-		$page = 'main';
+		if( isset($this->page) )	return $this->page;
+
+		$page = $this->page = 'main';
 		if( !isset($_GET['page']) )	return $page;
 		if( empty($_GET['page']) )	return $page;
 
-		$page = $_GET['page'];
+		$page = $this->page = $_GET['page'];
 		return $page;
 	}
 
-	function GetTabs( $page ){
-		if( isset($this->tabs[$page]) ) 	return $this->tabs[$page];
-		return [ 'empty' ];
+	private function GetTabs( $page ){
+		$tab =	isset($_GET['tab'])		? $_GET['tab']	: 'index' ;
+		if( !isset($this->tabs[$page][$tab]) )	return 'error';
+
+		return $tab;
 	}
+/*	private function GetTabs( $page ){
+		if( isset($this->tabs[$page]) ) 	return $this->tabs[$page];
+		return [ 'index' ];
+	}*/
 
 	private function SetTitle(){
 		$title = 'Главная';
